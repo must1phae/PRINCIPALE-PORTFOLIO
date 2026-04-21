@@ -840,6 +840,8 @@ const nav = document.getElementById('nav');
 const sections = ['about','skills','projects','services','process','testimonials','faq','contact'];
 const wheelSections = ['hero', ...sections];
 let wheelLock = false;
+let wheelDeltaBuffer = 0;
+let wheelBufferTimer = null;
 
 function scrollToSection(targetId){
   const target = document.getElementById(targetId);
@@ -864,12 +866,31 @@ function getCurrentWheelSectionIndex(){
   return currentIndex;
 }
 
+function isNearSectionAnchor(){
+  const navHeight = nav ? nav.getBoundingClientRect().height : 0;
+  const offset = navHeight + 16;
+  const idx = getCurrentWheelSectionIndex();
+  const section = document.getElementById(wheelSections[idx]);
+  if(!section) return false;
+  const sectionTop = window.scrollY + section.getBoundingClientRect().top - offset;
+  return Math.abs(window.scrollY - sectionTop) <= 80;
+}
+
 window.addEventListener('wheel', e => {
+  if (window.matchMedia('(max-width: 1024px)').matches) return;
   if (wheelLock) return;
-  if (Math.abs(e.deltaY) < 10) return;
+  if (!isNearSectionAnchor()) return;
+
+  wheelDeltaBuffer += e.deltaY;
+  if (wheelBufferTimer) window.clearTimeout(wheelBufferTimer);
+  wheelBufferTimer = window.setTimeout(() => {
+    wheelDeltaBuffer = 0;
+  }, 200);
+
+  if (Math.abs(wheelDeltaBuffer) < 140) return;
 
   const index = getCurrentWheelSectionIndex();
-  const nextIndex = e.deltaY > 0
+  const nextIndex = wheelDeltaBuffer > 0
     ? Math.min(index + 1, wheelSections.length - 1)
     : Math.max(index - 1, 0);
 
@@ -881,10 +902,11 @@ window.addEventListener('wheel', e => {
 
   e.preventDefault();
   wheelLock = true;
+  wheelDeltaBuffer = 0;
   scrollToSection(targetId);
   window.setTimeout(() => {
     wheelLock = false;
-  }, 900);
+  }, 1300);
 }, { passive: false });
 
 document.querySelectorAll('.nav-links a[href^="#"]').forEach(link => {
