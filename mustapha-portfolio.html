@@ -119,12 +119,7 @@ body.cursor-hover #c-ring{width:62px;height:62px;opacity:.7;border-color:rgba(23
 /* ─── ABOUT ──────────────────────────────────────────────── */
 #about{padding:10rem 2.5rem;display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center;border-top:1px solid var(--br)}
 .about-img-wrap{position:relative;aspect-ratio:3/4;border-radius:6px;overflow:hidden;background:var(--bg3)}
-.about-upload-zone{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;cursor:none;transition:all .3s;z-index:2}
-.about-upload-zone.has-image{opacity:0;pointer-events:none}
-.about-upload-zone::before{content:'';position:absolute;inset:1rem;border:1px dashed rgba(232,24,12,.25);border-radius:4px;pointer-events:none;transition:border-color .3s}
-.about-upload-zone:hover::before{border-color:rgba(232,24,12,.6)}
-#about-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;opacity:0;transition:opacity .8s var(--ease-out);z-index:1}
-#about-img.loaded{opacity:1}
+#about-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;z-index:1}
 .about-img-badge{position:absolute;bottom:1.5rem;left:1.5rem;z-index:5;background:rgba(8,8,8,.9);border:1px solid var(--br);backdrop-filter:blur(12px);padding:.6rem 1rem;border-radius:3px;font-family:var(--f-mono);font-size:.6rem;color:var(--r);letter-spacing:.1em}
 .about-tags{position:absolute;top:1.5rem;right:1.5rem;z-index:5;display:flex;flex-direction:column;gap:.35rem;align-items:flex-end}
 .about-tag{background:rgba(232,24,12,.1);border:1px solid var(--rb);color:var(--r);font-family:var(--f-mono);font-size:.56rem;letter-spacing:.1em;padding:.25rem .65rem;border-radius:2px}
@@ -137,11 +132,6 @@ h2.big{font-family:var(--f-display);font-size:clamp(3rem,5.5vw,5.2rem);line-heig
 .stat .n{font-family:var(--f-display);font-size:3rem;font-weight:800;color:var(--w);line-height:1;letter-spacing:-.03em}
 .stat .n em{color:var(--r);font-style:normal}
 .stat .l{font-size:.7rem;color:var(--g);letter-spacing:.06em;margin-top:.3rem}
-#about-change{position:absolute;bottom:1.5rem;right:1.5rem;z-index:10;font-family:var(--f-mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--g);background:rgba(8,8,8,.8);border:1px solid var(--br);padding:.4rem .9rem;border-radius:100px;display:none;transition:all .25s;cursor:none}
-#about-change.show{display:block}
-#about-change:hover{border-color:var(--rb);color:var(--w)}
-#about-file{display:none}
-
 /* ─── SKILLS ─────────────────────────────────────────────── */
 #skills{padding:8rem 2.5rem;border-top:1px solid var(--br)}
 .skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--br);border:1px solid var(--br);border-radius:4px;overflow:hidden;margin-top:4rem}
@@ -358,18 +348,8 @@ footer{border-top:1px solid var(--br);overflow:hidden}
     </div>
   </div>
   <div class="hero-r">
-    <div class="upload-zone" id="hero-upload" title="Cliquez pour ajouter une image">
-      <div class="upload-border"></div>
-      <div class="upload-icon">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--r)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-      </div>
-      <span class="upload-label">Ajouter une photo</span>
-      <span class="upload-hint">JPG, PNG, WebP — glisser ou cliquer</span>
-    </div>
-    <img id="hero-img" alt="Mustapha">
+    <img id="hero-img" class="loaded" src="9252338 (1).png" alt="Mustapha">
     <div class="hero-img-overlay"></div>
-    <button class="upload-change" id="hero-change">↺ Changer</button>
-    <input type="file" id="hero-file" accept="image/*">
     <canvas id="hero-canvas" style="position:absolute;inset:0;width:100%;height:100%;z-index:0;opacity:.6"></canvas>
   </div>
   <div class="hero-meta" id="hero-meta">
@@ -417,20 +397,13 @@ footer{border-top:1px solid var(--br);overflow:hidden}
 <!-- ABOUT -->
 <section id="about">
   <div class="about-img-wrap reveal" style="position:relative">
-    <div class="about-upload-zone" id="about-upload" title="Cliquez pour ajouter votre portrait">
-      <div class="upload-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--r)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
-      <span class="upload-label">Portrait photo</span>
-      <span class="upload-hint" style="font-size:.68rem;color:var(--g2)">Format portrait recommandé</span>
-    </div>
-    <img id="about-img" alt="Portrait de Mustapha">
+    <video id="about-video" src="590534569950856483.mp4" autoplay muted loop playsinline></video>
     <div class="about-tags">
       <span class="about-tag">IA ENGINEER</span>
       <span class="about-tag">AR DEVELOPER</span>
       <span class="about-tag">FREELANCE</span>
     </div>
     <div class="about-img-badge">📍 Casablanca — Remote OK</div>
-    <button id="about-change">↺ Changer</button>
-    <input type="file" id="about-file" accept="image/*">
   </div>
   <div class="about-body">
     <div class="section-lbl reveal">À propos</div>
@@ -795,52 +768,21 @@ ham.addEventListener('click', () => {
 });
 
 /* ──────────────────────────────────────────────
-   IMAGE UPLOAD — HERO
+   HERO IMAGE (static)
 ────────────────────────────────────────────── */
-const heroUpload = document.getElementById('hero-upload');
-const heroFile   = document.getElementById('hero-file');
-const heroImg    = document.getElementById('hero-img');
-const heroChange = document.getElementById('hero-change');
-
-function setHeroImage(file){
-  const url = URL.createObjectURL(file);
-  heroImg.src = url;
-  heroImg.onload = () => {
+const heroImg = document.getElementById('hero-img');
+const heroCanvas = document.getElementById('hero-canvas');
+if (heroImg && heroCanvas) {
+  if (heroImg.complete && heroImg.naturalWidth > 0) {
     heroImg.classList.add('loaded');
-    heroUpload.classList.add('has-image');
-    heroChange.classList.add('show');
-    document.getElementById('hero-canvas').style.display = 'none';
-  };
+    heroCanvas.style.display = 'none';
+  } else {
+    heroImg.addEventListener('load', () => {
+      heroImg.classList.add('loaded');
+      heroCanvas.style.display = 'none';
+    });
+  }
 }
-heroUpload.addEventListener('click', () => heroFile.click());
-heroFile.addEventListener('change', e => { if(e.target.files[0]) setHeroImage(e.target.files[0]); });
-heroChange.addEventListener('click', e => { e.stopPropagation(); heroFile.click(); });
-heroUpload.addEventListener('dragover', e => { e.preventDefault(); heroUpload.style.background='rgba(232,24,12,.06)'; });
-heroUpload.addEventListener('dragleave', () => { heroUpload.style.background=''; });
-heroUpload.addEventListener('drop', e => { e.preventDefault(); heroUpload.style.background=''; if(e.dataTransfer.files[0]) setHeroImage(e.dataTransfer.files[0]); });
-
-/* ──────────────────────────────────────────────
-   IMAGE UPLOAD — ABOUT
-────────────────────────────────────────────── */
-const aboutUpload = document.getElementById('about-upload');
-const aboutFile   = document.getElementById('about-file');
-const aboutImg    = document.getElementById('about-img');
-const aboutChange = document.getElementById('about-change');
-
-function setAboutImage(file){
-  const url = URL.createObjectURL(file);
-  aboutImg.src = url;
-  aboutImg.onload = () => {
-    aboutImg.classList.add('loaded');
-    aboutUpload.classList.add('has-image');
-    aboutChange.classList.add('show');
-  };
-}
-aboutUpload.addEventListener('click', () => aboutFile.click());
-aboutFile.addEventListener('change', e => { if(e.target.files[0]) setAboutImage(e.target.files[0]); });
-aboutChange.addEventListener('click', e => { e.stopPropagation(); aboutFile.click(); });
-aboutUpload.addEventListener('dragover', e => { e.preventDefault(); });
-aboutUpload.addEventListener('drop', e => { e.preventDefault(); if(e.dataTransfer.files[0]) setAboutImage(e.dataTransfer.files[0]); });
 
 /* ──────────────────────────────────────────────
    HERO CANVAS (animated background when no image)
