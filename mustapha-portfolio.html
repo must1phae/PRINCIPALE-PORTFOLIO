@@ -647,11 +647,11 @@ footer{border-top:1px solid var(--br);overflow:hidden}
   <div class="section-lbl reveal" style="justify-content:center">Contact</div>
   <h2 class="big reveal" style="text-align:center;font-size:clamp(2.5rem,6vw,6rem)">TRAVAILLONS<br>ENSEMBLE</h2>
   <p class="contact-sub reveal">Disponible pour un stage, une mission freelance ou une collaboration sur un projet IA/AR. Je réponds rapidement.</p>
-  <a href="mailto:mustapha@email.com" class="contact-email reveal">mustapha@email.com</a>
+  <a href="mailto:mostaphaelghazal102030@gmail.com" class="contact-email reveal">mostaphaelghazal102030@gmail.com</a>
   <div class="contact-socials reveal">
-    <a href="mailto:mustapha@email.com" class="btn-r mag">Envoyer un message ↗</a>
+    <a href="mailto:mostaphaelghazal102030@gmail.com" class="btn-r mag">Envoyer un message ↗</a>
     <a href="#" class="btn-o mag">GitHub @must1phae</a>
-    <a href="#" class="btn-o mag">LinkedIn</a>
+    <a href="https://www.linkedin.com/in/mustaphaelghazzal" target="_blank" rel="noreferrer" class="btn-o mag">LinkedIn</a>
   </div>
 </section>
 
@@ -691,9 +691,9 @@ footer{border-top:1px solid var(--br);overflow:hidden}
     </div>
     <div class="footer-col">
       <h4>Contact</h4>
-      <a href="mailto:mustapha@email.com">mustapha@email.com</a>
+      <a href="mailto:mostaphaelghazal102030@gmail.com">mostaphaelghazal102030@gmail.com</a>
       <a href="#">GitHub @must1phae</a>
-      <a href="#">LinkedIn</a>
+      <a href="https://www.linkedin.com/in/mustaphaelghazzal" target="_blank" rel="noreferrer">LinkedIn</a>
       <a href="#">Casablanca, Maroc</a>
     </div>
   </div>
@@ -744,6 +744,67 @@ tick(); setInterval(tick, 1000);
 ────────────────────────────────────────────── */
 const nav = document.getElementById('nav');
 const sections = ['about','skills','projects','services','process','testimonials','faq','contact'];
+const wheelSections = ['hero', ...sections];
+let wheelLock = false;
+
+function scrollToSection(targetId){
+  const target = document.getElementById(targetId);
+  if(!target) return;
+  const navHeight = nav ? nav.getBoundingClientRect().height : 0;
+  const top = window.scrollY + target.getBoundingClientRect().top - navHeight - 16;
+  window.scrollTo({ top: Math.max(top, 0), behavior: 'smooth' });
+}
+
+function getCurrentWheelSectionIndex(){
+  const navHeight = nav ? nav.getBoundingClientRect().height : 0;
+  const marker = window.scrollY + navHeight + 120;
+  let currentIndex = 0;
+
+  for (let i = 0; i < wheelSections.length; i++) {
+    const section = document.getElementById(wheelSections[i]);
+    if (!section) continue;
+    const sectionTop = window.scrollY + section.getBoundingClientRect().top;
+    if (sectionTop <= marker) currentIndex = i;
+  }
+
+  return currentIndex;
+}
+
+window.addEventListener('wheel', e => {
+  if (wheelLock) return;
+  if (Math.abs(e.deltaY) < 10) return;
+
+  const index = getCurrentWheelSectionIndex();
+  const nextIndex = e.deltaY > 0
+    ? Math.min(index + 1, wheelSections.length - 1)
+    : Math.max(index - 1, 0);
+
+  if (nextIndex === index) return;
+
+  const targetId = wheelSections[nextIndex];
+  const target = document.getElementById(targetId);
+  if (!target) return;
+
+  e.preventDefault();
+  wheelLock = true;
+  scrollToSection(targetId);
+  window.setTimeout(() => {
+    wheelLock = false;
+  }, 900);
+}, { passive: false });
+
+document.querySelectorAll('.nav-links a[href^="#"]').forEach(link => {
+  link.addEventListener('click', e => {
+    const targetId = link.getAttribute('href').slice(1);
+    const target = document.getElementById(targetId);
+    if(!target) return;
+    e.preventDefault();
+    scrollToSection(targetId);
+    if (window.matchMedia('(max-width: 768px)').matches && navLinks) {
+      navLinks.style.display = 'none';
+    }
+  });
+});
 
 window.addEventListener('scroll', () => {
   nav.classList.toggle('stuck', window.scrollY > 60);
