@@ -45,14 +45,17 @@ body.cursor-hover #c-ring{width:62px;height:62px;opacity:.7;border-color:rgba(23
 .nav-links a:hover,.nav-links a.on{color:var(--w)}
 .nav-btn{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;font-weight:500;border:1px solid var(--br);padding:.55rem 1.4rem;border-radius:100px;transition:all .25s;color:var(--g)}
 .nav-btn:hover{border-color:var(--rb);color:var(--w);background:var(--rg)}
-.recruiter-btn{color:var(--r);border-color:rgba(232,24,12,.35);background:rgba(232,24,12,.08)}
-.recruiter-btn:hover{background:rgba(232,24,12,.16);border-color:var(--r)}
 .nav-time{font-family:var(--f-mono);font-size:.62rem;color:var(--g);letter-spacing:.08em}
 .ham{display:none;flex-direction:column;gap:4px;padding:.4rem}
 .ham span{display:block;width:18px;height:1px;background:var(--w);transition:all .3s}
 
 /* ─── RECRUITER VIEW ────────────────────────────────────── */
 body.recruiter-open{overflow:hidden}
+.recruiter-fab{position:fixed;right:1.2rem;bottom:1.2rem;z-index:1105;width:58px;height:58px;border-radius:50%;border:1px solid rgba(232,24,12,.38);background:linear-gradient(180deg,rgba(232,24,12,.2),rgba(232,24,12,.08));display:grid;place-items:center;color:var(--w);box-shadow:0 12px 30px rgba(0,0,0,.35),0 0 0 1px rgba(255,255,255,.04) inset;transition:transform .25s var(--ease-out),box-shadow .25s var(--ease-out),border-color .25s}
+.recruiter-fab:hover{transform:translateY(-3px) scale(1.03);border-color:var(--r);box-shadow:0 16px 34px rgba(0,0,0,.4),0 0 0 1px rgba(255,255,255,.06) inset,0 0 26px rgba(232,24,12,.25)}
+.recruiter-fab svg{width:22px;height:22px;display:block}
+.recruiter-fab-label{position:absolute;right:68px;white-space:nowrap;background:rgba(8,8,8,.94);border:1px solid var(--br);border-radius:999px;padding:.35rem .7rem;font-family:var(--f-mono);font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:var(--g);opacity:0;transform:translateX(6px);transition:all .2s;pointer-events:none}
+.recruiter-fab:hover .recruiter-fab-label{opacity:1;transform:translateX(0)}
 .recruiter-overlay{position:fixed;inset:0;z-index:1200;display:grid;place-items:center;background:rgba(5,5,5,.72);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);opacity:0;pointer-events:none;transition:opacity .28s var(--ease-out)}
 .recruiter-overlay.open{opacity:1;pointer-events:auto}
 .recruiter-card{width:min(92vw,640px);background:var(--bg2);border:1px solid rgba(232,24,12,.24);border-radius:14px;padding:1.6rem;position:relative;overflow:hidden;transform:translateY(20px) scale(.985);transition:transform .35s var(--ease-out),border-color .3s}
@@ -372,7 +375,6 @@ footer{border-top:1px solid var(--br);overflow:hidden}
   .nav-time{display:none}
   .ham{display:flex}
   .nav-btn{display:none}
-  .recruiter-btn{display:inline-flex;padding:.5rem 1rem;font-size:.6rem}
   #hero{padding-top:70px}
   .hero-l{padding:1.5rem 1.5rem 3rem}
   #about,#code-stats,#skills,#projects,#services,#process,#testimonials,#faq,#contact{padding:5rem 1.5rem}
@@ -516,6 +518,8 @@ footer{border-top:1px solid var(--br);overflow:hidden}
   .recruiter-item .k{font-size:.46rem}
   .recruiter-item .v{font-size:.74rem;line-height:1.45}
   .recruiter-note{font-size:.67rem;line-height:1.5}
+  .recruiter-fab{width:52px;height:52px;right:.85rem;bottom:.85rem}
+  .recruiter-fab-label{display:none}
 }
 
 /* ─── MAGNETIC BUTTONS ───────────────────────────────────── */
@@ -541,11 +545,19 @@ footer{border-top:1px solid var(--br);overflow:hidden}
   </div>
   <div style="display:flex;align-items:center;gap:1.5rem">
     <div class="nav-time" id="nav-time"></div>
-    <button id="recruiter-view-btn" class="nav-btn recruiter-btn mag" type="button">Recruiter View</button>
     <a href="#contact" class="nav-btn mag">Me contacter</a>
   </div>
   <button class="ham" id="ham"><span></span><span></span><span></span></button>
 </nav>
+
+<button id="recruiter-view-btn" class="recruiter-fab" type="button" aria-label="Ouvrir Recruiter View">
+  <span class="recruiter-fab-label">Recruiter View</span>
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <rect x="3" y="6" width="18" height="14" rx="2"></rect>
+    <path d="M9 6V4.8A1.8 1.8 0 0 1 10.8 3h2.4A1.8 1.8 0 0 1 15 4.8V6"></path>
+    <path d="M3 12h18"></path>
+  </svg>
+</button>
 
 <div id="recruiter-overlay" class="recruiter-overlay" aria-hidden="true">
   <div class="recruiter-card" role="dialog" aria-modal="true" aria-labelledby="recruiter-title">
