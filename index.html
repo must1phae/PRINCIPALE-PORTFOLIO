@@ -45,9 +45,30 @@ body.cursor-hover #c-ring{width:62px;height:62px;opacity:.7;border-color:rgba(23
 .nav-links a:hover,.nav-links a.on{color:var(--w)}
 .nav-btn{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;font-weight:500;border:1px solid var(--br);padding:.55rem 1.4rem;border-radius:100px;transition:all .25s;color:var(--g)}
 .nav-btn:hover{border-color:var(--rb);color:var(--w);background:var(--rg)}
+.recruiter-btn{color:var(--r);border-color:rgba(232,24,12,.35);background:rgba(232,24,12,.08)}
+.recruiter-btn:hover{background:rgba(232,24,12,.16);border-color:var(--r)}
 .nav-time{font-family:var(--f-mono);font-size:.62rem;color:var(--g);letter-spacing:.08em}
 .ham{display:none;flex-direction:column;gap:4px;padding:.4rem}
 .ham span{display:block;width:18px;height:1px;background:var(--w);transition:all .3s}
+
+/* ─── RECRUITER VIEW ────────────────────────────────────── */
+body.recruiter-open{overflow:hidden}
+.recruiter-overlay{position:fixed;inset:0;z-index:1200;display:grid;place-items:center;background:rgba(5,5,5,.72);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);opacity:0;pointer-events:none;transition:opacity .28s var(--ease-out)}
+.recruiter-overlay.open{opacity:1;pointer-events:auto}
+.recruiter-card{width:min(92vw,640px);background:var(--bg2);border:1px solid rgba(232,24,12,.24);border-radius:14px;padding:1.6rem;position:relative;overflow:hidden;transform:translateY(20px) scale(.985);transition:transform .35s var(--ease-out),border-color .3s}
+.recruiter-overlay.open .recruiter-card{transform:translateY(0) scale(1)}
+.recruiter-card::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at top right,rgba(232,24,12,.12),transparent 42%);pointer-events:none}
+.recruiter-head{display:flex;justify-content:space-between;gap:1rem;align-items:flex-start;margin-bottom:1rem;position:relative;z-index:1}
+.recruiter-lbl{font-family:var(--f-mono);font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--r);margin-bottom:.45rem}
+.recruiter-title{font-family:var(--f-display);font-size:clamp(1.5rem,4vw,2.4rem);font-weight:800;line-height:.95;letter-spacing:-.03em;color:var(--w)}
+.recruiter-close{width:34px;height:34px;border:1px solid var(--br);border-radius:50%;display:grid;place-items:center;color:var(--g);transition:all .25s}
+.recruiter-close:hover{color:var(--w);border-color:var(--rb);background:var(--rg)}
+.recruiter-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--br);border:1px solid var(--br);position:relative;z-index:1}
+.recruiter-item{background:var(--bg3);padding:1rem .95rem;min-height:92px}
+.recruiter-item .k{font-family:var(--f-mono);font-size:.54rem;letter-spacing:.14em;text-transform:uppercase;color:var(--g2);margin-bottom:.4rem}
+.recruiter-item .v{font-size:.9rem;line-height:1.6;color:var(--w)}
+.recruiter-item .v a{color:var(--r)}
+.recruiter-note{margin-top:1rem;font-size:.78rem;line-height:1.7;color:var(--g);position:relative;z-index:1}
 
 /* ─── HERO ───────────────────────────────────────────────── */
 #hero{position:relative;min-height:100vh;display:grid;grid-template-columns:1fr 1fr;overflow:hidden}
@@ -351,6 +372,7 @@ footer{border-top:1px solid var(--br);overflow:hidden}
   .nav-time{display:none}
   .ham{display:flex}
   .nav-btn{display:none}
+  .recruiter-btn{display:inline-flex;padding:.5rem 1rem;font-size:.6rem}
   #hero{padding-top:70px}
   .hero-l{padding:1.5rem 1.5rem 3rem}
   #about,#code-stats,#skills,#projects,#services,#process,#testimonials,#faq,#contact{padding:5rem 1.5rem}
@@ -488,6 +510,12 @@ footer{border-top:1px solid var(--br);overflow:hidden}
   .footer-copy{font-size:0.6rem}
   .mq-item{font-size:0.6rem;padding:0 0.8rem}
   .footer-mq-item{font-size:clamp(1rem,3vw,1.5rem)}
+  .recruiter-card{padding:1rem;border-radius:10px}
+  .recruiter-grid{grid-template-columns:1fr}
+  .recruiter-item{min-height:auto;padding:.85rem .8rem}
+  .recruiter-item .k{font-size:.46rem}
+  .recruiter-item .v{font-size:.74rem;line-height:1.45}
+  .recruiter-note{font-size:.67rem;line-height:1.5}
 }
 
 /* ─── MAGNETIC BUTTONS ───────────────────────────────────── */
@@ -513,10 +541,30 @@ footer{border-top:1px solid var(--br);overflow:hidden}
   </div>
   <div style="display:flex;align-items:center;gap:1.5rem">
     <div class="nav-time" id="nav-time"></div>
+    <button id="recruiter-view-btn" class="nav-btn recruiter-btn mag" type="button">Recruiter View</button>
     <a href="#contact" class="nav-btn mag">Me contacter</a>
   </div>
   <button class="ham" id="ham"><span></span><span></span><span></span></button>
 </nav>
+
+<div id="recruiter-overlay" class="recruiter-overlay" aria-hidden="true">
+  <div class="recruiter-card" role="dialog" aria-modal="true" aria-labelledby="recruiter-title">
+    <div class="recruiter-head">
+      <div>
+        <div class="recruiter-lbl">10-second recruiter view</div>
+        <h3 class="recruiter-title" id="recruiter-title">Mustapha El Ghazzal</h3>
+      </div>
+      <button id="recruiter-close" class="recruiter-close" type="button" aria-label="Fermer">✕</button>
+    </div>
+    <div class="recruiter-grid">
+      <div class="recruiter-item"><div class="k">Spécialité</div><div class="v">IA, Vision par Ordinateur, AR et développement full-stack.</div></div>
+      <div class="recruiter-item"><div class="k">Formation</div><div class="v">EST Safi (Génie Informatique) avec focus IA appliquée.</div></div>
+      <div class="recruiter-item"><div class="k">Disponibilité</div><div class="v">Freelance et stage, remote ou hybride.</div></div>
+      <div class="recruiter-item"><div class="k">Contact</div><div class="v"><a href="mailto:mostaphaelghazal102030@gmail.com">mostaphaelghazal102030@gmail.com</a></div></div>
+    </div>
+    <p class="recruiter-note">Résumé express pour recruteurs pressés: profil orienté exécution, projets IA concrets (dont PFE VTON), et capacité à livrer rapidement des solutions complètes.</p>
+  </div>
+</div>
 
 <!-- HERO -->
 <section id="hero">
@@ -1161,6 +1209,27 @@ const journeyPanelKicker = document.getElementById('journey-panel-kicker');
 const journeyPanelText = document.getElementById('journey-panel-text');
 const journeyPanelTags = document.getElementById('journey-panel-tags');
 const journeyPanelGrid = document.getElementById('journey-panel-grid');
+const recruiterViewBtn = document.getElementById('recruiter-view-btn');
+const recruiterOverlay = document.getElementById('recruiter-overlay');
+const recruiterClose = document.getElementById('recruiter-close');
+
+function setRecruiterView(open){
+  if(!recruiterOverlay) return;
+  recruiterOverlay.classList.toggle('open', open);
+  recruiterOverlay.setAttribute('aria-hidden', open ? 'false' : 'true');
+  document.body.classList.toggle('recruiter-open', open);
+}
+
+if (recruiterViewBtn && recruiterOverlay && recruiterClose) {
+  recruiterViewBtn.addEventListener('click', () => setRecruiterView(true));
+  recruiterClose.addEventListener('click', () => setRecruiterView(false));
+  recruiterOverlay.addEventListener('click', e => {
+    if (e.target === recruiterOverlay) setRecruiterView(false);
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && recruiterOverlay.classList.contains('open')) setRecruiterView(false);
+  });
+}
 
 function updateJourneyPanel(step){
   if(!step || !journeyPanelYear || !journeyPanelKicker || !journeyPanelText || !journeyPanelTags || !journeyPanelGrid) return;
