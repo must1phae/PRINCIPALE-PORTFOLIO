@@ -134,6 +134,33 @@ h2.big{font-family:var(--f-display);font-size:clamp(3rem,5.5vw,5.2rem);line-heig
 .stat .n em{color:var(--r);font-style:normal}
 .stat .l{font-size:.7rem;color:var(--g);letter-spacing:.06em;margin-top:.3rem}
 
+/* ─── JOURNEY ───────────────────────────────────────────── */
+#journey{padding:8rem 2.5rem;border-top:1px solid var(--br);background:linear-gradient(180deg,rgba(255,255,255,.01),transparent)}
+.journey-wrap{display:grid;grid-template-columns:.95fr 1.05fr;gap:1.5rem;margin-top:4rem;align-items:start}
+.journey-list{display:flex;flex-direction:column;gap:.9rem}
+.journey-step{width:100%;text-align:left;background:var(--bg2);border:1px solid var(--br);border-radius:10px;padding:1.1rem 1.2rem;display:grid;grid-template-columns:auto 1fr auto;gap:1rem;align-items:center;transition:all .3s var(--ease-out);position:relative;overflow:hidden}
+.journey-step::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(to bottom,var(--r),transparent);transform:scaleY(0);transform-origin:top;transition:transform .35s var(--ease-out)}
+.journey-step:hover,.journey-step.active{background:var(--bg3);border-color:rgba(232,24,12,.28);transform:translateY(-2px)}
+.journey-step:hover::before,.journey-step.active::before{transform:scaleY(1)}
+.journey-year{font-family:var(--f-display);font-size:1.25rem;font-weight:800;letter-spacing:-.03em;color:var(--w);line-height:1}
+.journey-meta{display:flex;flex-direction:column;gap:.28rem}
+.journey-kicker{font-family:var(--f-mono);font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:var(--r)}
+.journey-title{font-family:var(--f-display);font-size:1rem;font-weight:700;letter-spacing:-.01em;color:var(--w)}
+.journey-desc{font-size:.8rem;line-height:1.7;color:var(--g)}
+.journey-pill{font-family:var(--f-mono);font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:var(--g);border:1px solid var(--br);border-radius:999px;padding:.28rem .62rem;white-space:nowrap}
+.journey-panel{background:var(--bg2);border:1px solid var(--br);border-radius:10px;padding:1.8rem;position:sticky;top:90px;overflow:hidden}
+.journey-panel::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at top right,rgba(232,24,12,.08),transparent 45%);pointer-events:none}
+.journey-panel-head{display:flex;justify-content:space-between;gap:1rem;align-items:flex-start;margin-bottom:1.2rem;position:relative;z-index:1}
+.journey-panel-year{font-family:var(--f-display);font-size:clamp(2rem,4vw,3.5rem);font-weight:800;line-height:.9;letter-spacing:-.04em;color:var(--w)}
+.journey-panel-kicker{font-family:var(--f-mono);font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--r);margin-top:.45rem}
+.journey-panel-text{font-size:.9rem;line-height:1.8;color:var(--g);position:relative;z-index:1}
+.journey-panel-list{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:1.2rem;position:relative;z-index:1}
+.journey-panel-tag{font-family:var(--f-mono);font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;color:var(--w);border:1px solid rgba(232,24,12,.18);background:rgba(232,24,12,.08);padding:.3rem .6rem;border-radius:999px}
+.journey-panel-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--br);margin-top:1.4rem;position:relative;z-index:1}
+.journey-metric{background:var(--bg3);padding:1rem .9rem}
+.journey-metric .n{font-family:var(--f-display);font-size:1.45rem;font-weight:800;letter-spacing:-.03em;color:var(--w);line-height:1}
+.journey-metric .l{font-size:.58rem;color:var(--g);letter-spacing:.08em;text-transform:uppercase;margin-top:.35rem}
+
 /* ─── CODE STATS ────────────────────────────────────────── */
 #code-stats{padding:8rem 2.5rem;border-top:1px solid var(--br);background:linear-gradient(180deg,rgba(255,255,255,.01),transparent)}
 .code-stats-layout{display:grid;grid-template-columns:1.15fr .85fr;gap:1.5rem;margin-top:4rem}
@@ -380,6 +407,20 @@ footer{border-top:1px solid var(--br);overflow:hidden}
   .stats{gap:1rem;margin-top:1rem}
   .stat .n{font-size:1.5rem}
   .stat .l{font-size:0.55rem}
+  #journey{padding:2rem 0.8rem}
+  .journey-wrap{grid-template-columns:1fr;gap:1rem;margin-top:1.5rem}
+  .journey-step{padding:0.9rem 0.8rem;gap:0.7rem;border-radius:8px}
+  .journey-year{font-size:1rem}
+  .journey-title{font-size:0.8rem}
+  .journey-desc{font-size:0.65rem;line-height:1.45}
+  .journey-pill{font-size:0.45rem;padding:0.2rem 0.5rem}
+  .journey-panel{position:relative;top:auto;padding:1rem}
+  .journey-panel-year{font-size:1.55rem}
+  .journey-panel-text{font-size:0.72rem;line-height:1.55}
+  .journey-panel-tag{font-size:0.45rem;padding:0.22rem 0.45rem}
+  .journey-panel-grid{grid-template-columns:1fr;gap:0.5px}
+  .journey-metric .n{font-size:1.1rem}
+  .journey-metric .l{font-size:0.48rem}
   #code-stats{padding:2rem 0.8rem}
   .code-stats-layout{grid-template-columns:1fr;gap:1rem;margin-top:1.5rem}
   .code-stats-panel.hard{padding:1rem}
@@ -463,6 +504,7 @@ footer{border-top:1px solid var(--br);overflow:hidden}
   <a href="#hero" class="nav-logo">MUSTA<em>.</em></a>
   <div class="nav-links" id="nav-links">
     <a href="#about" data-s="about">À propos</a>
+    <a href="#journey" data-s="journey">Parcours</a>
     <a href="#code-stats" data-s="code-stats">Stats code</a>
     <a href="#skills" data-s="skills">Compétences</a>
     <a href="#projects" data-s="projects">Projets</a>
@@ -565,6 +607,81 @@ footer{border-top:1px solid var(--br);overflow:hidden}
       <div class="stat"><div class="n" data-count="5">0<em>+</em></div><div class="l">Projets phares</div></div>
       <div class="stat"><div class="n" data-count="100">0<em>%</em></div><div class="l">Passion & dedication</div></div>
     </div>
+  </div>
+</section>
+
+<!-- JOURNEY -->
+<section id="journey">
+  <div class="section-lbl reveal">Parcours</div>
+  <h2 class="big reveal" style="margin-bottom:0">UNE TRAJECTOIRE<br>QUI DONNE DU CONTEXTE</h2>
+  <div class="journey-wrap">
+    <div class="journey-list reveal" id="journey-list">
+      <button class="journey-step active" data-year="2021" data-title="Lycée" data-kicker="Base académique" data-desc="Formation générale au lycée, où j’ai construit les bases en logique, mathématiques et rigueur de travail qui m’ont ensuite servi dans le développement." data-tags="logique, discipline, autonomie" data-metrics="4 projets scolaires, 1 orientation technique, 1 méthode de travail solide">
+        <span class="journey-year">2021</span>
+        <span class="journey-meta">
+          <span class="journey-kicker">Lycée</span>
+          <span class="journey-title">Bases académiques et méthode</span>
+          <span class="journey-desc">Rigueur, curiosité technique et goût pour les problèmes structurés.</span>
+        </span>
+        <span class="journey-pill">Fondation</span>
+      </button>
+      <button class="journey-step" data-year="2023 / 2024" data-title="Bac obtenu" data-kicker="Fin du lycée" data-desc="Obtention du baccalauréat en 2023/2024, avec une base académique solide et une orientation claire vers l’informatique." data-tags="bac, bases solides, orientation technique" data-metrics="1 bac obtenu, 1 cap défini, 1 transition réussie">
+        <span class="journey-year">2023/24</span>
+        <span class="journey-meta">
+          <span class="journey-kicker">Bac</span>
+          <span class="journey-title">Obtention du baccalauréat</span>
+          <span class="journey-desc">Le point de départ vers les études supérieures en génie informatique.</span>
+        </span>
+        <span class="journey-pill">Diplôme</span>
+      </button>
+      <button class="journey-step" data-year="09/2024" data-title="Arrivée à l’ESTS" data-kicker="Nouvelle étape" data-desc="En septembre 2024, j’ai intégré l’ESTS à Safi en génie informatique, avec une montée progressive sur la programmation, les systèmes et les projets techniques." data-tags="ests, génie informatique, programmation" data-metrics="1 rentrée, 1 nouvelle filière, 1 montée en compétences">
+        <span class="journey-year">09/2024</span>
+        <span class="journey-meta">
+          <span class="journey-kicker">ESTS</span>
+          <span class="journey-title">Arrivée à l’ESTS</span>
+          <span class="journey-desc">Début du parcours en génie informatique à Safi.</span>
+        </span>
+        <span class="journey-pill">Départ</span>
+      </button>
+      <button class="journey-step" data-year="2024" data-title="Projets dev web" data-kicker="Montée en production" data-desc="En 2024, je me suis orienté vers des projets web plus concrets: interfaces, intégration front-end, logique back-end, et début d’une vraie approche produit." data-tags="react, fastapi, frontend, backend" data-metrics="2 projets web, 1 stack full-stack, 1 portfolio plus mature">
+        <span class="journey-year">2024</span>
+        <span class="journey-meta">
+          <span class="journey-kicker">Web</span>
+          <span class="journey-title">Projets de développement web</span>
+          <span class="journey-desc">Passage de l’apprentissage aux livrables visibles et présentables.</span>
+        </span>
+        <span class="journey-pill">Produit</span>
+      </button>
+      <button class="journey-step" data-year="2025" data-title="IA & PFE VTON" data-kicker="Cap sur l’IA" data-desc="En 2025, j’ai concentré mes efforts sur des projets IA et sur le PFE Virtual Try-On (VTON), avec une logique de recherche, de performance et d’intégration applicative." data-tags="yolov9, ar foundation, arcore, computer vision" data-metrics="1 PFE VTON, 2 axes IA, 1 démonstration technique forte">
+        <span class="journey-year">2025</span>
+        <span class="journey-meta">
+          <span class="journey-kicker">IA / PFE</span>
+          <span class="journey-title">Projets IA et PFE VTON</span>
+          <span class="journey-desc">Travail ciblé sur la vision par ordinateur et l’AR appliquée.</span>
+        </span>
+        <span class="journey-pill">Avancé</span>
+      </button>
+    </div>
+    <aside class="journey-panel reveal" id="journey-panel">
+      <div class="journey-panel-head">
+        <div>
+          <div class="journey-panel-kicker" id="journey-panel-kicker">Base académique</div>
+          <div class="journey-panel-year" id="journey-panel-year">2021</div>
+        </div>
+        <div class="journey-panel-kicker">Clique sur une étape</div>
+      </div>
+      <p class="journey-panel-text" id="journey-panel-text">Formation générale au lycée, où j’ai construit les bases en logique, mathématiques et rigueur de travail qui m’ont ensuite servi dans le développement.</p>
+      <div class="journey-panel-list" id="journey-panel-tags">
+        <span class="journey-panel-tag">logique</span>
+        <span class="journey-panel-tag">discipline</span>
+        <span class="journey-panel-tag">autonomie</span>
+      </div>
+      <div class="journey-panel-grid" id="journey-panel-grid">
+        <div class="journey-metric"><div class="n">4</div><div class="l">Projets scolaires</div></div>
+        <div class="journey-metric"><div class="n">1</div><div class="l">Orientation technique</div></div>
+        <div class="journey-metric"><div class="n">1</div><div class="l">Méthode solide</div></div>
+      </div>
+    </aside>
   </div>
 </section>
 
@@ -885,6 +1002,7 @@ footer{border-top:1px solid var(--br);overflow:hidden}
     <div class="footer-col">
       <h4>Navigation</h4>
       <a href="#about">À propos</a>
+      <a href="#journey">Parcours</a>
       <a href="#code-stats">Stats code</a>
       <a href="#skills">Compétences</a>
       <a href="#projects">Projets</a>
@@ -952,7 +1070,7 @@ tick(); setInterval(tick, 1000);
    NAV SCROLL + ACTIVE SECTION
 ────────────────────────────────────────────── */
 const nav = document.getElementById('nav');
-const sections = ['about','code-stats','skills','projects','services','process','testimonials','faq','contact'];
+const sections = ['about','journey','code-stats','skills','projects','services','process','testimonials','faq','contact'];
 const wheelSections = ['hero', ...sections];
 let wheelLock = false;
 let wheelDeltaBuffer = 0;
@@ -1036,6 +1154,38 @@ document.querySelectorAll('.nav-links a[href^="#"]').forEach(link => {
     }
   });
 });
+
+const journeySteps = document.querySelectorAll('.journey-step');
+const journeyPanelYear = document.getElementById('journey-panel-year');
+const journeyPanelKicker = document.getElementById('journey-panel-kicker');
+const journeyPanelText = document.getElementById('journey-panel-text');
+const journeyPanelTags = document.getElementById('journey-panel-tags');
+const journeyPanelGrid = document.getElementById('journey-panel-grid');
+
+function updateJourneyPanel(step){
+  if(!step || !journeyPanelYear || !journeyPanelKicker || !journeyPanelText || !journeyPanelTags || !journeyPanelGrid) return;
+  journeyPanelYear.textContent = step.dataset.year || '';
+  journeyPanelKicker.textContent = step.dataset.kicker || '';
+  journeyPanelText.textContent = step.dataset.desc || '';
+  journeyPanelTags.innerHTML = (step.dataset.tags || '').split(',').map(tag => tag.trim()).filter(Boolean).map(tag => `<span class="journey-panel-tag">${tag}</span>`).join('');
+  const metrics = (step.dataset.metrics || '').split(',').map(item => item.trim()).filter(Boolean);
+  journeyPanelGrid.innerHTML = metrics.map((metric, index) => {
+    const parts = metric.split(' ');
+    const value = parts.shift() || '';
+    const label = parts.join(' ') || `Point ${index + 1}`;
+    return `<div class="journey-metric"><div class="n">${value}</div><div class="l">${label}</div></div>`;
+  }).join('');
+}
+
+journeySteps.forEach(step => {
+  step.addEventListener('click', () => {
+    journeySteps.forEach(item => item.classList.remove('active'));
+    step.classList.add('active');
+    updateJourneyPanel(step);
+  });
+});
+
+updateJourneyPanel(document.querySelector('.journey-step.active'));
 
 window.addEventListener('scroll', () => {
   nav.classList.toggle('stuck', window.scrollY > 60);
